@@ -1,0 +1,65 @@
+{
+  "mcp": {
+    "protocol_version": "0.1",
+    "tool_version": "1.0.0"
+  },
+  "tools": [
+    {
+      "name": "echo",
+      "description": "Echo back the input message",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "The message to echo back"
+          }
+        },
+        "required": ["message"]
+      }
+    },
+    {
+      "name": "greet",
+      "description": "Generate a greeting for the specified name",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name to greet"
+          },
+          "language": {
+            "type": "string",
+            "description": "The language to use for the greeting",
+            "enum": ["English", "Spanish", "French", "Chinese"],
+            "default": "English"
+          }
+        },
+        "required": ["name"]
+      }
+    },
+    {
+      "name": "calculate",
+      "description": "Perform a simple calculation",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "type": "string",
+            "description": "The operation to perform",
+            "enum": ["add", "subtract", "multiply", "divide"]
+          },
+          "a": {
+            "type": "number",
+            "description": "First operand"
+          },
+          "b": {
+            "type": "number",
+            "description": "Second operand"
+          }
+        },
+        "required": ["operation", "a", "b"]
+      }
+    }
+  ]
+}
