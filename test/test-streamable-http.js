@@ -4,7 +4,7 @@
  *
  * 此脚本会:
  * 1. 启动一个文件系统 MCP 服务器
- * 2. 使用 supergateway 将其转换为 Streamable HTTP
+ * 2. 使用 mcpgateway 将其转换为 Streamable HTTP
  * 3. 使用客户端连接并测试功能
  *
  * 用法:
@@ -190,7 +190,7 @@ async function main() {
     console.log('=== Streamable HTTP 功能测试 ===')
     console.log('测试目录:', TEST_DIR)
 
-    // 启动 supergateway 进程
+    // 启动 mcpgateway 进程
     console.log('\n--- 启动 Supergateway (stdio → Streamable HTTP) ---')
 
     const gatewayCommand = 'node'

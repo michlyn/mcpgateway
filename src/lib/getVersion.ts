@@ -11,7 +11,7 @@ export function getVersion(): string {
     const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'))
     return packageJson.version || '1.0.0'
   } catch (err) {
-    console.error('[supergateway]', 'Unable to retrieve version:', err)
+    console.error('[mcpgateway]', 'Unable to retrieve version:', err)
     return 'unknown'
   }
 }

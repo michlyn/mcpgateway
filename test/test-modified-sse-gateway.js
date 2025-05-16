@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * 测试脚本：通过SuperGateway测试认证头传递到SSE服务
- * 该脚本通过SuperGateway连接并验证认证头是否传递
+ * 测试脚本：通过McpGateway测试认证头传递到SSE服务
+ * 该脚本通过McpGateway连接并验证认证头是否传递
  */
 
 import fetch from 'node-fetch'
@@ -12,7 +12,7 @@ import { once } from 'events'
 
 // 配置
 const CONFIG = {
-  // SuperGateway端点
+  // McpGateway端点
   gatewayUrl: 'http://localhost:8000',
   httpPath: '/mcp',
   // 测试认证头
@@ -24,10 +24,10 @@ const CONFIG = {
 }
 
 /**
- * 通过SuperGateway连接测试
+ * 通过McpGateway连接测试
  */
 async function testGatewayConnection() {
-  console.log(chalk.blue('\n=== 通过SuperGateway连接测试 ==='))
+  console.log(chalk.blue('\n=== 通过McpGateway连接测试 ==='))
   console.log(chalk.blue(`连接到: ${CONFIG.gatewayUrl}${CONFIG.httpPath}`))
 
   try {
@@ -136,10 +136,10 @@ async function testGatewayConnection() {
       }
     }
 
-    console.log(chalk.green('✅ SuperGateway连接测试完成'))
+    console.log(chalk.green('✅ McpGateway连接测试完成'))
     console.log(chalk.blue('请检查SSE服务日志中是否显示认证头'))
   } catch (error) {
-    console.error(chalk.red(`❌ SuperGateway连接测试失败:`))
+    console.error(chalk.red(`❌ McpGateway连接测试失败:`))
     console.error(chalk.red(error.message))
     console.error(error)
   }

@@ -2,7 +2,7 @@
 
 /**
  * 简单的认证头传递测试
- * 该脚本测试SuperGateway是否正确传递认证头到SSE服务
+ * 该脚本测试McpGateway是否正确传递认证头到SSE服务
  */
 
 import fetch from 'node-fetch'

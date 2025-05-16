@@ -4,7 +4,7 @@
  *
  * 此脚本会:
  * 1. 启动一个文件系统 MCP SSE 服务器
- * 2. 使用 supergateway 将SSE转换为 Streamable HTTP
+ * 2. 使用 mcpgateway 将SSE转换为 Streamable HTTP
  * 3. 使用客户端连接并测试功能
  *
  * 用法:

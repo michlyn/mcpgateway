@@ -1,10 +1,10 @@
 {
-  "name": "@gfsopen/supergateway",
-  "version": "3.0.7",
+  "name": "@michlyn/mcpgateway",
+  "version": "3.0.12",
   "description": "Enhanced version of supercorp-ai/supergateway, adding streamable http support and the ability to run MCP services based on both OpenAPI protocol interface documentation and higress MCP template files.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wizizm/supergateway.git"
+    "url": "git+https://github.com/michlyn/mcpgateway.git"
   },
   "keywords": [
     "mcp",
@@ -18,7 +18,7 @@
   ],
   "type": "module",
   "bin": {
-    "supergateway": "dist/index.js",
+    "mcpgateway": "dist/index.js",
     "openapi-to-mcp": "dist/cmd/openapi-to-mcp.js"
   },
   "scripts": {
@@ -28,9 +28,14 @@
     "format:check": "prettier --check 'src/**/*.ts' '*.json' '.prettierrc'",
     "test:streamable-http": "node test/test-streamable-http.js",
     "test:sse-to-streamable-http": "node test/test-sse-to-streamable-http.js",
+    "test:auth-headers": "node test/test-auth-headers.js",
+    "test:verify-auth-headers": "node test/verify-auth-headers.js",
     "test": "node test/run-all-tests.js",
     "openapi-to-mcp": "node dist/cmd/openapi-to-mcp.js",
-    "pub": "npm run build && npm config set registry https://registry.npmjs.org/ && npm publish --access public"
+    "pub": "npm run build && npm config set registry https://registry.npmjs.org/ && npm publish --access public",
+    "test:direct-sse": "node test/test-direct-sse.js",
+    "test:modified-sse": "node test/test-modified-sse-gateway.js",
+    "test:auth-headers-pass": "node test/test-auth-headers-pass.js"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

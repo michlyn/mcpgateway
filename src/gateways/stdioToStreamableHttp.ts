@@ -476,7 +476,7 @@ export async function stdioToStreamableHttp(args: StdioToStreamableHttpArgs) {
         logger.info(`Creating new session for ${sessionId}`)
         // 为新会话创建传输和服务器实例
         const server = new Server(
-          { name: 'supergateway', version: getVersion() },
+          { name: 'mcpgateway', version: getVersion() },
           { capabilities: {} },
         )
 

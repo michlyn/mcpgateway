@@ -84,7 +84,7 @@ export async function stdioToSse(args: StdioToSseArgs) {
   })
 
   const server = new Server(
-    { name: 'supergateway', version: getVersion() },
+    { name: 'mcpgateway', version: getVersion() },
     { capabilities: {} },
   )
 

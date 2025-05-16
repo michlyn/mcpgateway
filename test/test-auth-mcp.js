@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Test script to verify authentication header passing through SuperGateway's MCP endpoint
+ * Test script to verify authentication header passing through McpGateway's MCP endpoint
  */
 
 import fetch from 'node-fetch'

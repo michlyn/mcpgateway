@@ -1,21 +1,12 @@
 ### Enhanced version of https://github.com/supercorp-ai/supergateway, adding streamablehttp support and the ability to run MCP services based on both OpenAPI protocol interface documentation and [higress MCP template files](https://github.com/higress-group/openapi-to-mcpserver).
 
-# SuperGateway
+# McpGateway
 
-**SuperGateway** is a versatile protocol conversion tool for Model Context Protocol (MCP) servers, enabling:
+**McpGateway** is a versatile protocol conversion tool for Model Context Protocol (MCP) servers, enabling:
 
 1. Running **MCP stdio-based servers** over **SSE (Server-Sent Events)**, **WebSockets (WS)**, or **Streamable HTTP**
 2. Converting **OpenAPI 3.0.1** interface definitions to **MCP tools**
 3. Providing seamless interoperability between different MCP transport protocols
-
-## Recent Updates
-
-- **May 25, 2024**: Added robust reconnection mechanisms for both SSE and stdio services, implementing exponential backoff strategy and maximum retry limits to prevent service interruptions due to connection failures.
-- **November 18, 2024**: Enhanced authentication header handling with improved fetch interception, centralized auth header management, and multi-layer auth propagation to solve "login timeout" errors.
-- **May 20, 2024**: Optimized the apiToSse.ts module based on the official MCP SSE server example, improving code structure, error handling, and session management.
-- **May 19, 2024**: Fixed OpenAPI to MCP URL building issues and verified cross-API compatibility.
-- **May 18, 2024**: Improved MCP service generation by referencing the Higress openapi-to-mcpserver project.
-- **May 16, 2024**: Fixed CherryStudio compatibility issues with the MCP service.
 
 ## Key Features
 
@@ -41,10 +32,10 @@
 
 ## Installation & Usage
 
-Run SuperGateway via `npx`:
+Run McpGateway via `npx`:
 
 ```bash
-npx -y @gfsopen/supergateway --stdio "uvx mcp-server-git"
+npx -y @michlyn/mcpgateway --stdio "uvx mcp-server-git"
 ```
 
 ### Common Options
@@ -78,7 +69,7 @@ npx -y @gfsopen/supergateway --stdio "uvx mcp-server-git"
 Expose an MCP stdio server as an SSE server:
 
 ```bash
-npx -y @gfsopen/supergateway \
+npx -y @michlyn/mcpgateway \
     --stdio "npx -y @modelcontextprotocol/server-filesystem ./my-folder" \
     --port 8000 --baseUrl http://localhost:8000 \
     --ssePath /sse --messagePath /message
@@ -92,7 +83,7 @@ npx -y @gfsopen/supergateway \
 Expose an MCP stdio server as a Streamable HTTP server:
 
 ```bash
-npx -y @gfsopen/supergateway \
+npx -y @michlyn/mcpgateway \
     --stdio "npx -y @modelcontextprotocol/server-filesystem ./my-folder" \
     --port 8000 --baseUrl http://localhost:8000 \
     --outputTransport streamable-http --httpPath /mcp
@@ -105,13 +96,13 @@ npx -y @gfsopen/supergateway \
 Connect to a remote SSE server and expose locally via stdio:
 
 ```bash
-npx -y @gfsopen/supergateway --sse "https://mcp-server-ab71a6b2-cd55-49d0-adba-562bc85956e3.supermachine.app"
+npx -y @michlyn/mcpgateway --sse "https://mcp-server-ab71a6b2-cd55-49d0-adba-562bc85956e3.supermachine.app"
 ```
 
 You can add authentication headers:
 
 ```bash
-npx -y @gfsopen/supergateway \
+npx -y @michlyn/mcpgateway \
     --sse "https://mcp-server-ab71a6b2-cd55-49d0-adba-562bc85956e3.supermachine.app" \
     --oauth2Bearer "some-access-token" \
     --header "X-My-Header: another-header-value"
@@ -122,7 +113,7 @@ npx -y @gfsopen/supergateway \
 Convert a remote SSE MCP server to Streamable HTTP:
 
 ```bash
-npx -y @gfsopen/supergateway \
+npx -y @michlyn/mcpgateway \
     --sse "https://mcp-server-ab71a6b2-cd55-49d0-adba-562bc85956e3.supermachine.app" \
     --outputTransport streamable-http --port 8000 --httpPath /mcp
 ```
@@ -134,7 +125,7 @@ npx -y @gfsopen/supergateway \
 Expose an MCP stdio server as a WebSocket server:
 
 ```bash
-npx -y @gfsopen/supergateway \
+npx -y @michlyn/mcpgateway \
     --stdio "npx -y @modelcontextprotocol/server-filesystem ./my-folder" \
     --port 8000 --outputTransport ws --messagePath /message
 ```
@@ -147,28 +138,28 @@ Convert an OpenAPI specification to an MCP server:
 
 ```bash
 # Using Streamable HTTP
-npx -y @gfsopen/supergateway \
+npx -y @michlyn/mcpgateway \
     --api ./openapi.json --apiHost https://api.example.com \
     --outputTransport streamable-http --port 8000 --httpPath /mcp
 
 # Using SSE
-npx -y @gfsopen/supergateway \
+npx -y @michlyn/mcpgateway \
     --api ./openapi.json --apiHost https://api.example.com \
     --outputTransport sse --port 8000 --ssePath /sse --messagePath /message
 ```
 
-SuperGateway automatically detects whether the input file is an OpenAPI specification or an MCP template:
+McpGateway automatically detects whether the input file is an OpenAPI specification or an MCP template:
 
 - If it's an OpenAPI spec, it converts it to an MCP template and provides the service
 - If it's already an MCP template, it uses it directly
 
 ## OpenAPI to MCP Conversion Tool
 
-SuperGateway includes a standalone tool to convert OpenAPI documents to MCP templates:
+McpGateway includes a standalone tool to convert OpenAPI documents to MCP templates:
 
 ```bash
 # Using npx
-npx -y @gfsopen/supergateway openapi-to-mcp --input openapi.json --output mcp-template.json
+npx -y @michlyn/mcpgateway openapi-to-mcp --input openapi.json --output mcp-template.json
 
 # Or use the direct command
 openapi-to-mcp --input openapi.json --output mcp-template.json
@@ -188,10 +179,10 @@ openapi-to-mcp --input openapi.json --output mcp-template.json
 
 ### Example with MCP Inspector (stdio → SSE mode)
 
-1. Run SuperGateway:
+1. Run McpGateway:
 
 ```bash
-npx -y @gfsopen/supergateway --port 8000 \
+npx -y @michlyn/mcpgateway --port 8000 \
     --stdio "npx -y @modelcontextprotocol/server-filesystem /Users/MyName/Desktop"
 ```
 
@@ -203,7 +194,7 @@ npx @modelcontextprotocol/inspector
 
 ### Using with Cursor (SSE → stdio mode)
 
-Cursor can integrate with SuperGateway in SSE→stdio mode:
+Cursor can integrate with McpGateway in SSE→stdio mode:
 
 ```json
 {
@@ -212,7 +203,7 @@ Cursor can integrate with SuperGateway in SSE→stdio mode:
       "command": "npx",
       "args": [
         "-y",
-        "@gfsopen/supergateway",
+        "@michlyn/mcpgateway",
         "--sse",
         "https://mcp-server-ab71a6b2-cd55-49d0-adba-562bc85956e3.supermachine.app"
       ]
@@ -223,7 +214,7 @@ Cursor can integrate with SuperGateway in SSE→stdio mode:
 
 ### Using with Modern Cursor (Streamable HTTP mode)
 
-Cursor can use SuperGateway's stdio→Streamable HTTP mode:
+Cursor can use McpGateway's stdio→Streamable HTTP mode:
 
 ```json
 {
@@ -236,28 +227,28 @@ Cursor can use SuperGateway's stdio→Streamable HTTP mode:
 }
 ```
 
-Run SuperGateway on your local machine:
+Run McpGateway on your local machine:
 
 ```bash
-npx -y @gfsopen/supergateway \
+npx -y @michlyn/mcpgateway \
     --stdio "npx -y @modelcontextprotocol/server-filesystem ./my-folder" \
     --outputTransport streamable-http --port 8000 --httpPath /mcp
 ```
 
 ## Docker Support
 
-SuperGateway is available as a Docker image, making it easy to run without installing Node.js locally.
+McpGateway is available as a Docker image, making it easy to run without installing Node.js locally.
 
 ### Docker Image
 
-Available on Docker Hub: [michlyn/supergateway](https://hub.docker.com/r/michlyn/supergateway)
+Available on Docker Hub: [michlyn/mcpgateway](https://hub.docker.com/r/michlyn/mcpgateway)
 
 ### Docker Examples for All Gateway Types
 
 #### stdio → SSE
 
 ```bash
-docker run -it --rm -p 8000:8000 michlyn/supergateway \
+docker run -it --rm -p 8000:8000 michlyn/mcpgateway \
     --stdio "npx -y @modelcontextprotocol/server-filesystem /" \
     --port 8000 --ssePath /sse --messagePath /message
 ```
@@ -265,7 +256,7 @@ docker run -it --rm -p 8000:8000 michlyn/supergateway \
 #### stdio → Streamable HTTP
 
 ```bash
-docker run -it --rm -p 8000:8000 michlyn/supergateway \
+docker run -it --rm -p 8000:8000 michlyn/mcpgateway \
     --stdio "npx -y @modelcontextprotocol/server-filesystem /" \
     --outputTransport streamable-http --port 8000 --httpPath /mcp
 ```
@@ -273,7 +264,7 @@ docker run -it --rm -p 8000:8000 michlyn/supergateway \
 #### stdio → WS
 
 ```bash
-docker run -it --rm -p 8000:8000 michlyn/supergateway \
+docker run -it --rm -p 8000:8000 michlyn/mcpgateway \
     --stdio "npx -y @modelcontextprotocol/server-filesystem /" \
     --outputTransport ws --port 8000 --messagePath /message
 ```
@@ -281,7 +272,7 @@ docker run -it --rm -p 8000:8000 michlyn/supergateway \
 #### SSE → stdio
 
 ```bash
-docker run -it --rm michlyn/supergateway \
+docker run -it --rm michlyn/mcpgateway \
     --sse "https://mcp-server-example.supermachine.app" \
     --outputTransport stdio
 ```
@@ -289,7 +280,7 @@ docker run -it --rm michlyn/supergateway \
 #### SSE → Streamable HTTP
 
 ```bash
-docker run -it --rm -p 8000:8000 michlyn/supergateway \
+docker run -it --rm -p 8000:8000 michlyn/mcpgateway \
     --sse "https://mcp-server-example.supermachine.app" \
     --outputTransport streamable-http --port 8000 --httpPath /mcp
 ```
@@ -297,7 +288,7 @@ docker run -it --rm -p 8000:8000 michlyn/supergateway \
 #### API → SSE
 
 ```bash
-docker run -it --rm -p 8000:8000 michlyn/supergateway \
+docker run -it --rm -p 8000:8000 michlyn/mcpgateway \
     --api /path/to/openapi.json --apiHost https://api.example.com \
     --outputTransport sse --port 8000 --ssePath /sse --messagePath /message
 ```
@@ -305,7 +296,7 @@ docker run -it --rm -p 8000:8000 michlyn/supergateway \
 #### API → Streamable HTTP
 
 ```bash
-docker run -it --rm -p 8000:8000 michlyn/supergateway \
+docker run -it --rm -p 8000:8000 michlyn/mcpgateway \
     --api /path/to/openapi.json --apiHost https://api.example.com \
     --outputTransport streamable-http --port 8000 --httpPath /mcp
 ```
@@ -315,7 +306,7 @@ docker run -it --rm -p 8000:8000 michlyn/supergateway \
 To provide files from your host system:
 
 ```bash
-docker run -it --rm -p 8000:8000 -v $(pwd):/workspace michlyn/supergateway \
+docker run -it --rm -p 8000:8000 -v $(pwd):/workspace michlyn/mcpgateway \
     --stdio "npx -y @modelcontextprotocol/server-filesystem /workspace" \
     --port 8000
 ```
@@ -327,10 +318,10 @@ docker run -it --rm -p 8000:8000 -v $(pwd):/workspace michlyn/supergateway \
 npm run build
 
 # 2. Build Docker image
-docker build -t supergateway .
+docker build -t mcpgateway .
 
 # 3. Run the container
-docker run -it --rm -p 8000:8000 supergateway \
+docker run -it --rm -p 8000:8000 mcpgateway \
     --stdio "npx -y @modelcontextprotocol/server-filesystem /" \
     --port 8000
 ```
@@ -338,7 +329,7 @@ docker run -it --rm -p 8000:8000 supergateway \
 ## Public Access with ngrok
 
 Share your local MCP server publicly:
-npx -y @gfsopen/supergateway --port 8000 --stdio "npx -y @modelcontextprotocol/server-filesystem ."
+npx -y @michlyn/mcpgateway --port 8000 --stdio "npx -y @modelcontextprotocol/server-filesystem ."
 
 # In another terminal:
 
@@ -494,13 +485,13 @@ If you encounter issues with SSE connections or tool calls not being processed:
 
 ## Why MCP?
 
-[Model Context Protocol](https://spec.modelcontextprotocol.io/) standardizes AI tool interactions. SuperGateway converts between different MCP transport types (stdio, SSE, WS, and Streamable HTTP), simplifying integration and debugging with various clients.
+[Model Context Protocol](https://spec.modelcontextprotocol.io/) standardizes AI tool interactions. McpGateway converts between different MCP transport types (stdio, SSE, WS, and Streamable HTTP), simplifying integration and debugging with various clients.
 
-The Streamable HTTP transport is the latest MCP standard, offering improved performance and better compatibility with modern web infrastructure. SuperGateway makes it easy to use this transport with any MCP server, regardless of the transport it natively supports.
+The Streamable HTTP transport is the latest MCP standard, offering improved performance and better compatibility with modern web infrastructure. McpGateway makes it easy to use this transport with any MCP server, regardless of the transport it natively supports.
 
 ## Advanced Features
 
-- **Automatic File Type Detection**: SuperGateway intelligently detects whether input files are OpenAPI specs or MCP templates
+- **Automatic File Type Detection**: McpGateway intelligently detects whether input files are OpenAPI specs or MCP templates
 - **Parameter Type Validation**: Robust validation and conversion for different parameter types
 - **Comprehensive CORS Support**: Configurable cross-origin resource sharing
 - **Enhanced Session Management**: Robust handling of session IDs with fallback mechanisms
@@ -531,7 +522,7 @@ Issues and PRs welcome. Please open one if you encounter problems or have featur
 
 欢迎有兴趣的伙伴+v入群技术沟通：
 
-<img src="mywxqrcode.jpg" alt="微信二维码" width="200"/>
+<img src="https://raw.githubusercontent.com/wizizm/mcpgateway/main/mywxqrcode.jpg" alt="微信二维码" width="200"/>
 
 ```
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Direct test script to verify authentication header passing through SuperGateway
+ * Direct test script to verify authentication header passing through McpGateway
  * This script checks the health endpoint and logging directly
  */
 

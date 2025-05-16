@@ -111,7 +111,7 @@ export async function sseToStreamableHttp(args: SseToStreamableHttpArgs) {
 
     isConnecting = true
     try {
-      client = new Client({ name: 'supergateway', version: getVersion() })
+      client = new Client({ name: 'mcpgateway', version: getVersion() })
       sseTransport = new SSEClientTransport(new URL(sseUrl), {
         requestInit: { headers },
         eventSourceInit: {
@@ -314,7 +314,7 @@ export async function sseToStreamableHttp(args: SseToStreamableHttpArgs) {
         logger.info(`Creating new session for ${sessionId}`)
         // Create server instance for new session
         const server = new Server(
-          { name: 'supergateway', version: getVersion() },
+          { name: 'mcpgateway', version: getVersion() },
           { capabilities: {} },
         )
 
@@ -383,7 +383,7 @@ export async function sseToStreamableHttp(args: SseToStreamableHttpArgs) {
                 case 'tools/list':
                   // Tools list request
                   const resourcesClient = new Client({
-                    name: 'supergateway',
+                    name: 'mcpgateway',
                     version: getVersion(),
                   })
                   const resourcesSseTransport = new SSEClientTransport(
@@ -438,7 +438,7 @@ export async function sseToStreamableHttp(args: SseToStreamableHttpArgs) {
                 case 'tools/call':
                   // Tool call request - create a new client with auth headers
                   const toolClient = new Client({
-                    name: 'supergateway',
+                    name: 'mcpgateway',
                     version: getVersion(),
                   })
                   const toolSseTransport = new SSEClientTransport(
@@ -501,7 +501,7 @@ export async function sseToStreamableHttp(args: SseToStreamableHttpArgs) {
                 case 'resources/read':
                   // Resource read request
                   const readClient = new Client({
-                    name: 'supergateway',
+                    name: 'mcpgateway',
                     version: getVersion(),
                   })
                   const readSseTransport = new SSEClientTransport(

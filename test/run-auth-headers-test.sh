@@ -14,7 +14,7 @@ RED='\033[0;31m'
 NC='\033[0m' # 无颜色
 
 echo -e "${BLUE}========================================${NC}"
-echo -e "${BLUE}= SuperGateway 认证头传递测试启动脚本 =${NC}"
+echo -e "${BLUE}= McpGateway 认证头传递测试启动脚本 =${NC}"
 echo -e "${BLUE}========================================${NC}"
 
 # 检查是否已构建
@@ -39,11 +39,11 @@ echo -e "${GREEN}SSE服务已启动，进程ID: $SSE_PID${NC}"
 echo -e "${BLUE}等待SSE服务启动...${NC}"
 sleep 2
 
-# 启动SuperGateway (后台运行)
-echo -e "${BLUE}启动SuperGateway (端口8000)...${NC}"
+# 启动McpGateway (后台运行)
+echo -e "${BLUE}启动McpGateway (端口8000)...${NC}"
 node dist/index.js --sse "http://localhost:8001" --outputTransport streamable-http --httpPath /mcp --port 8000 --healthEndpoint /health --healthEndpoint /status > gateway.log 2>&1 &
 GATEWAY_PID=$!
-echo -e "${GREEN}SuperGateway已启动，进程ID: $GATEWAY_PID${NC}"
+echo -e "${GREEN}McpGateway已启动，进程ID: $GATEWAY_PID${NC}"
 
 # 等待Gateway启动
 echo -e "${BLUE}等待Gateway启动...${NC}"

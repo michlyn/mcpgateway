@@ -6,20 +6,20 @@
  *
  * Usage:
  *   # stdio→SSE
- *   npx -y supergateway --stdio "npx -y @modelcontextprotocol/server-filesystem /" \
+ *   npx -y mcpgateway --stdio "npx -y @modelcontextprotocol/server-filesystem /" \
  *                       --port 8000 --baseUrl http://localhost:8000 --ssePath /sse --messagePath /message
  *
  *   # SSE→stdio
- *   npx -y supergateway --sse "https://mcp-server-ab71a6b2-cd55-49d0-adba-562bc85956e3.supermachine.app"
+ *   npx -y mcpgateway --sse "https://mcp-server-ab71a6b2-cd55-49d0-adba-562bc85956e3.supermachine.app"
  *
  *   # stdio→WS
- *   npx -y supergateway --stdio "npx -y @modelcontextprotocol/server-filesystem /" --outputTransport ws
+ *   npx -y mcpgateway --stdio "npx -y @modelcontextprotocol/server-filesystem /" --outputTransport ws
  *
  *   # stdio→Streamable HTTP
- *   npx -y supergateway --stdio "npx -y @modelcontextprotocol/server-filesystem /" --outputTransport streamable-http --httpPath /mcp
+ *   npx -y mcpgateway --stdio "npx -y @modelcontextprotocol/server-filesystem /" --outputTransport streamable-http --httpPath /mcp
  *
  *   # SSE→Streamable HTTP
- *   npx -y supergateway --sse "https://mcp-server-ab71a6b2-cd55-49d0-adba-562bc85956e3.supermachine.app" --outputTransport streamable-http --httpPath /mcp
+ *   npx -y mcpgateway --sse "https://mcp-server-ab71a6b2-cd55-49d0-adba-562bc85956e3.supermachine.app" --outputTransport streamable-http --httpPath /mcp
  */
 
 import yargs from 'yargs'
@@ -36,8 +36,8 @@ import { apiToStreamableHttp } from './gateways/apiToStreamableHttp.js'
 import { apiToSse } from './gateways/apiToSse.js'
 import { parseArgs } from './lib/parseArgs.js'
 
-const log = (...args: any[]) => console.log('[supergateway]', ...args)
-const logStderr = (...args: any[]) => console.error('[supergateway]', ...args)
+const log = (...args: any[]) => console.log('[mcpgateway]', ...args)
+const logStderr = (...args: any[]) => console.error('[mcpgateway]', ...args)
 
 const noneLogger: Logger = {
   info: () => {},
@@ -218,7 +218,7 @@ async function main() {
   })
 
   logger.info('Starting...')
-  logger.info('@gfsopen/supergateway is supported by gflinwenjie@qq.com')
+  logger.info('@michlyn/mcpgateway is supported by michlyn@qq.com')
   logger.info(`  - outputTransport: ${args.outputTransport}`)
 
   const argsWithDefaults = {

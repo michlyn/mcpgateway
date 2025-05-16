@@ -29,7 +29,7 @@ const newInitializeSseClient = ({ message }: { message: JSONRPCRequest }) => {
 
   return new Client(
     {
-      name: clientInfo?.name ?? 'supergateway',
+      name: clientInfo?.name ?? 'mcpgateway',
       version: clientInfo?.version ?? getVersion(),
     },
     {
@@ -45,7 +45,7 @@ const newFallbackSseClient = async ({
 }) => {
   const fallbackSseClient = new Client(
     {
-      name: 'supergateway',
+      name: 'mcpgateway',
       version: getVersion(),
     },
     {
@@ -91,7 +91,7 @@ export async function sseToStdio(args: SseToStdioArgs) {
 
   const stdioServer = new Server(
     {
-      name: 'supergateway',
+      name: 'mcpgateway',
       version: getVersion(),
     },
     {

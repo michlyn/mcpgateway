@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Test script for authentication header passing through the SuperGateway chain
+ * Test script for authentication header passing through the McpGateway chain
  *
  * This script:
  * 1. Makes requests to the Streamable HTTP endpoint with authentication headers

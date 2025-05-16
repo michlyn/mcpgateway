@@ -21,14 +21,14 @@ COPY LICENSE ./
 # 全局安装当前包
 RUN npm link --ignore-scripts
 
-# 设置环境变量以确保supergateway命令可用
+# 设置环境变量以确保mcpgateway命令可用
 ENV PATH /app/node_modules/.bin:$PATH
 
 # 暴露默认端口
 EXPOSE 8000
 
 # 设置入口点
-ENTRYPOINT ["supergateway"]
+ENTRYPOINT ["mcpgateway"]
 
 # 默认命令
 CMD ["--help"]

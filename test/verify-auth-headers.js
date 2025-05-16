@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * A simpler test script to verify authentication header passing through SuperGateway
+ * A simpler test script to verify authentication header passing through McpGateway
  *
  * This script:
  * 1. Makes requests to the health endpoint with authentication headers

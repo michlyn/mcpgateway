@@ -74,7 +74,7 @@ export async function stdioToWs(args: StdioToWsArgs) {
     })
 
     const server = new Server(
-      { name: 'supergateway', version: getVersion() },
+      { name: 'mcpgateway', version: getVersion() },
       { capabilities: {} },
     )
 
