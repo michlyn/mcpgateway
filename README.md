@@ -522,7 +522,7 @@ Issues and PRs welcome. Please open one if you encounter problems or have featur
 
 欢迎有兴趣的伙伴+v入群技术沟通：
 
-<img src="https://raw.githubusercontent.com/wizizm/mcpgateway/main/mywxqrcode.jpg" alt="微信二维码" width="200"/>
+<img src="https://raw.githubusercontent.com/michlyn/mcpgateway/main/mywxqrcode.jpg" alt="微信二维码" width="200"/>
 
 ```
 
